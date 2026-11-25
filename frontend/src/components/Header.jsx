@@ -69,7 +69,7 @@ export default function Header() {
             <path d="M6 7h12l-1 13H7L6 7Z" /><path d="M9 7a3 3 0 0 1 6 0" />
           </svg>
           {/* key={count} re-mounts the badge so it "bumps" every time the cart changes */}
-          <span key={count} className={`cart-count ${count ? 'bump' : ''}`} aria-hidden="true">{count}</span>
+          {count > 0 && <span key={count} className="cart-count bump" aria-hidden="true">{count}</span>}
         </Link>
         <button
           type="button"
