@@ -32,7 +32,7 @@ Secrets are only typed into the Render and Vercel dashboards. Nothing secret is 
 | `CORS_ORIGINS` | for now `http://localhost:5173`; changed to the Vercel URL in step 3 |
 
 4. **Apply** and wait for the deploy to show "Live".
-5. Open `https://<your-service>.onrender.com/api/health`. It should return a JSON "ok". `/docs` shows the API.
+5. Open `https://<your-service>.onrender.com/api/health`. It should return `{"status":"ok"}`. `/docs` shows the API.
 
 (Without a Blueprint: **New → Web Service**, pick the repo, and type the same root directory, commands and env vars by hand.)
 
