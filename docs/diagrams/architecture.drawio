@@ -1,0 +1,185 @@
+<mxfile host="app.diagrams.net" agent="NEXUS-COMMERCE" version="24.0.0">
+  <diagram id="system" name="System Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="NEXUS-COMMERCE — System Architecture" style="text;html=1;fontSize=22;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="700" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="buyer" value="Buyer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="190" width="40" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="merchant" value="Merchant (admin)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="470" width="40" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vercel" value="Vercel — React SPA (Vite)" style="swimlane;html=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="200" y="100" width="300" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="store" value="&lt;b&gt;Storefront pages&lt;/b&gt;&lt;br&gt;Home · Shop · Product&lt;br&gt;Cart · Checkout · Order · Contact" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="vercel">
+          <mxGeometry x="30" y="50" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="crm" value="&lt;b&gt;CRM pages (/admin)&lt;/b&gt;&lt;br&gt;Login · Dashboard · Orders&lt;br&gt;Customers · Inquiries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="vercel">
+          <mxGeometry x="30" y="350" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cart" value="&lt;b&gt;CartContext&lt;/b&gt;&lt;br&gt;cart in localStorage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;" vertex="1" parent="vercel">
+          <mxGeometry x="30" y="150" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="client" value="&lt;b&gt;api/client.js&lt;/b&gt;&lt;br&gt;fetch + errors&lt;br&gt;wake-up retry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;" vertex="1" parent="vercel">
+          <mxGeometry x="160" y="230" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sbjs" value="&lt;b&gt;supabase-js&lt;/b&gt;&lt;br&gt;(auth only, anon key)&lt;br&gt;AuthContext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;" vertex="1" parent="vercel">
+          <mxGeometry x="30" y="460" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="render" value="Render — FastAPI (Python)" style="swimlane;html=1;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="620" y="100" width="300" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="cors" value="CORSMiddleware (CORS_ORIGINS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;" vertex="1" parent="render">
+          <mxGeometry x="30" y="50" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pub" value="&lt;b&gt;Public routers&lt;/b&gt;&lt;br&gt;/health · /categories · /products&lt;br&gt;/cart/quote · /orders · /inquiries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;" vertex="1" parent="render">
+          <mxGeometry x="30" y="110" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="authdep" value="&lt;b&gt;require_admin&lt;/b&gt;&lt;br&gt;verify Bearer JWT + ADMIN_EMAILS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="render">
+          <mxGeometry x="30" y="280" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adm" value="&lt;b&gt;Admin routers&lt;/b&gt;&lt;br&gt;/admin/stats · /admin/orders&lt;br&gt;/admin/customers · /admin/inquiries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;" vertex="1" parent="render">
+          <mxGeometry x="30" y="360" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pyd" value="Pydantic validation · price recalculation · error mapping (400/401/402/403/404/409/422)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=11;" vertex="1" parent="render">
+          <mxGeometry x="30" y="460" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="supa" value="Supabase" style="swimlane;html=1;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="100" width="320" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="sauth" value="&lt;b&gt;Supabase Auth&lt;/b&gt;&lt;br&gt;admin user · issues JWT&lt;br&gt;public sign-ups disabled" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;" vertex="1" parent="supa">
+          <mxGeometry x="30" y="50" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pg" value="&lt;b&gt;Postgres&lt;/b&gt; (RLS on, no public policies)&lt;br&gt;products · customers · orders&lt;br&gt;order_items · order_status_history&lt;br&gt;inquiries · inquiry_notes&lt;br&gt;&lt;i&gt;fn place_order() · fn update_order_status()&lt;/i&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=12;fillColor=#ffffff;strokeColor=#9673a6;" vertex="1" parent="supa">
+          <mxGeometry x="30" y="190" width="260" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="storage" value="&lt;b&gt;Storage&lt;/b&gt;&lt;br&gt;bucket: product-images (public read)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;" vertex="1" parent="supa">
+          <mxGeometry x="30" y="420" width="260" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" value="browse &amp;amp; buy" style="endArrow=classic;html=1;" edge="1" parent="1" source="buyer" target="store">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="manage" style="endArrow=classic;html=1;" edge="1" parent="1" source="merchant" target="crm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="HTTPS JSON&lt;br&gt;(admin: Authorization: Bearer JWT)" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#6c8ebf;" edge="1" parent="1" source="client" target="cors">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="1. login (email+password)&lt;br&gt;2. JWT returned" style="endArrow=classic;startArrow=classic;html=1;dashed=1;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="sbjs" target="sauth">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="700" />
+              <mxPoint x="990" y="700" />
+              <mxPoint x="990" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="verify JWT (get_user)" style="endArrow=classic;html=1;dashed=1;strokeColor=#d6b656;" edge="1" parent="1" source="authdep" target="sauth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="service key (server only)" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="adm" target="pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="pub" target="pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="product image URLs (public)" style="endArrow=classic;html=1;dashed=1;strokeColor=#999999;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="storage" target="store">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="80" />
+              <mxPoint x="350" y="80" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" style="endArrow=none;html=1;dashed=1;strokeColor=#999999;" edge="1" parent="1" source="store" target="cart">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="endArrow=classic;html=1;strokeColor=#999999;" edge="1" parent="1" source="store" target="client">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="endArrow=classic;html=1;strokeColor=#999999;" edge="1" parent="1" source="crm" target="client">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" style="endArrow=classic;html=1;strokeColor=#999999;" edge="1" parent="1" source="authdep" target="adm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" style="endArrow=none;html=1;strokeColor=#999999;" edge="1" parent="1" source="crm" target="sbjs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;&lt;br&gt;Solid blue: browser → API&lt;br&gt;Solid green: API → database (service key)&lt;br&gt;Dashed purple/yellow: authentication (JWT)&lt;br&gt;Dashed grey: public image loads" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;strokeColor=#cccccc;rounded=1;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="730" width="320" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="erd" name="Database ERD">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="t0" value="NEXUS-COMMERCE — Database ERD (Supabase Postgres)" style="text;html=1;fontSize=22;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="800" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="customers" value="&lt;b&gt;customers&lt;/b&gt;&lt;hr&gt;🔑 id uuid&lt;br&gt;name text&lt;br&gt;email text UNIQUE&lt;br&gt;phone text&lt;br&gt;city text&lt;br&gt;created_at timestamptz" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="220" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="orders" value="&lt;b&gt;orders&lt;/b&gt;&lt;hr&gt;🔑 id text ('NX-1001')&lt;br&gt;🔗 customer_id uuid&lt;br&gt;ship_name, ship_email, ship_phone&lt;br&gt;ship_address, ship_city&lt;br&gt;payment text (cod | demo)&lt;br&gt;subtotal int · shipping int · total int&lt;br&gt;status text (pending | processing |&lt;br&gt;&amp;nbsp;shipped | delivered | cancelled)&lt;br&gt;created_at · updated_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="380" y="120" width="280" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="items" value="&lt;b&gt;order_items&lt;/b&gt;&lt;hr&gt;🔑 id bigint&lt;br&gt;🔗 order_id text&lt;br&gt;🔗 product_id text&lt;br&gt;product_name text (snapshot)&lt;br&gt;unit_price int (snapshot)&lt;br&gt;qty int (&amp;gt; 0)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="780" y="120" width="240" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="products" value="&lt;b&gt;products&lt;/b&gt;&lt;hr&gt;🔑 id text (slug)&lt;br&gt;name text&lt;br&gt;category text&lt;br&gt;description text&lt;br&gt;price int (&amp;gt; 0)&lt;br&gt;stock int (&amp;gt;= 0)&lt;br&gt;image_url · image_credit&lt;br&gt;featured bool&lt;br&gt;created_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="120" width="230" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="history" value="&lt;b&gt;order_status_history&lt;/b&gt;&lt;hr&gt;🔑 id bigint&lt;br&gt;🔗 order_id text&lt;br&gt;status text&lt;br&gt;changed_at timestamptz" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="400" y="450" width="240" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="inquiries" value="&lt;b&gt;inquiries&lt;/b&gt;&lt;hr&gt;🔑 id text ('INQ-1001')&lt;br&gt;name · email&lt;br&gt;subject · message&lt;br&gt;🔗 product_id text (nullable)&lt;br&gt;status text (open | in_progress | resolved)&lt;br&gt;created_at · updated_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="450" width="270" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="notes" value="&lt;b&gt;inquiry_notes&lt;/b&gt;&lt;hr&gt;🔑 id bigint&lt;br&gt;🔗 inquiry_id text&lt;br&gt;note text&lt;br&gt;created_at timestamptz" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="780" y="470" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r1" value="places" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;startArrow=ERmandOne;html=1;endFill=0;startFill=0;" edge="1" parent="1" source="customers" target="orders">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" value="contains" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;startArrow=ERmandOne;html=1;endFill=0;startFill=0;" edge="1" parent="1" source="orders" target="items">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" value="sold as" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;startArrow=ERmandOne;html=1;endFill=0;startFill=0;" edge="1" parent="1" source="products" target="items">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" value="status log" style="endArrow=ERmany;startArrow=ERmandOne;html=1;endFill=0;startFill=0;" edge="1" parent="1" source="orders" target="history">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" value="asked about (optional)" style="endArrow=ERmany;startArrow=ERzeroToOne;html=1;endFill=0;startFill=0;" edge="1" parent="1" source="products" target="inquiries">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" value="has" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;startArrow=ERmandOne;html=1;endFill=0;startFill=0;" edge="1" parent="1" source="inquiries" target="notes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fn" value="&lt;b&gt;Database functions&lt;/b&gt;&lt;br&gt;place_order(customer, items, payment) → order id&lt;br&gt;&amp;nbsp;&amp;nbsp;locks product rows, checks + reduces stock, upserts customer,&lt;br&gt;&amp;nbsp;&amp;nbsp;computes totals from DB prices, writes order + items + history&lt;br&gt;update_order_status(order_id, new_status)&lt;br&gt;&amp;nbsp;&amp;nbsp;validates transition, restocks on cancel, writes history&lt;br&gt;&lt;br&gt;&lt;b&gt;RLS&lt;/b&gt;: enabled on every table, no public policies (backend uses service key)" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;strokeColor=#cccccc;rounded=1;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="660" width="560" height="160" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

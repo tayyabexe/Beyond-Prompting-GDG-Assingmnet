@@ -1,0 +1,8 @@
+fastapi>=0.118,<1.0
+uvicorn[standard]>=0.37,<1.0
+supabase>=2.20,<3.0
+pydantic[email]>=2.12,<3.0
+pydantic-settings>=2.11,<3.0
+python-dotenv>=1.1,<2.0
+pyjwt>=2.10,<3.0
+pytest>=8.4,<9.0
