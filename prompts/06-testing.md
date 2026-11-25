@@ -38,18 +38,25 @@ requirement id), screenshots/, and prompts/06-testing.md.
 - Testing was split off to run in parallel with the deployment work. The first run was stopped by a misclick and restarted, carrying on from what already existed.
 - `seed.sql` can't be re-run from here (it runs in the Supabase SQL editor), so that step was skipped. The test orders appear in the screenshots, and the data is made up.
 - For the cancel test, a fresh order was placed through `POST /api/orders` so the stock change could be read exactly before and after.
-- Partway through I told it to stop adding test steps and write up what was done. The remaining checks are listed as "Not tested" in `docs/testing.md`.
+- Partway through I told it to stop adding test steps and write up what was done.
+- Then I came back for the rest: "we have to contniue with these remaining testing adn then upadte the status on the github of the proejct, + including the screenshots from the website". Second round (T28–T35), run on the production build:
+  - 5 orders fired at the same moment for the Pulse speaker (stock 2): exactly 2 went through, 3 got "out of stock", stock never went below 0. Both orders were cancelled afterwards.
+  - Load times: store pages show data in about 0.9 s, CRM pages in 1.4–2.0 s.
+  - Phone layout at 375px for every store and CRM page, using device emulation because the browser window wouldn't go narrower than 400px.
+  - Wrong admin password shows "Wrong email or password." and saves no session.
+- While timing the CRM pages, a Supabase timeout logged the admin out. Written up as a known issue with the planned fix; I said "thats enough, push the current execution", so it isn't fixed yet.
 
 ## Bugs found
 | Bug | Fix |
 |---|---|
 | After placing an order, the empty cart badge showed a red "0" | Badge only shown when the cart has items (`frontend/src/components/Header.jsx`) |
+| A Supabase timeout while checking the admin token gives 401, so the admin gets logged out | Not fixed yet. Plan: 503 for network errors, 401 only for bad tokens, cache verified tokens (`backend/app/auth.py`) |
 
 ## Implementation mapping
 | What | Where |
 |---|---|
-| Test report (27 manual tests with requirement ids) | `docs/testing.md` |
-| Screenshots (19 real captures) | `screenshots/01-home.png` … `screenshots/19-mobile-home.png` |
+| Test report (35 manual tests with requirement ids) | `docs/testing.md` |
+| Screenshots (28 real captures) | `screenshots/01-home.png` … `screenshots/28-admin-wrong-password.png` |
 | Automated tests | `backend/tests/` (validation, business rules, auth, seed data, write test) |
 | Bug fix | `frontend/src/components/Header.jsx` |
 
@@ -58,7 +65,7 @@ requirement id), screenshots/, and prompts/06-testing.md.
 - With `RUN_WRITE_TESTS=1` → 28 passed (created and cancelled NX-1009)
 - Manual: order NX-1010 placed, seen in the CRM, moved Pending → Processing → Shipped with history. Order NX-1011 cancelled; Aura stock went 14 → 12 → 14. Echo Buds stock 9 → 8 after the order.
 - Inquiry INQ-1006 sent, a note was added, and the status changed to In progress.
-- Not tested: wrong admin password, the phone layout on most pages, two checkouts at the same time, load times, the deployed site.
+- Second round: concurrency test 2 × 201 + 3 × 409, stock 2 → 0 → 2 after cancelling; pages under 2 s; no sideways scroll at 375px; wrong password rejected.
 
 ## My check
 -
